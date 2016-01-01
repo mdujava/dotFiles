@@ -1,3 +1,6 @@
+scriptencoding utf-8
+set encoding=utf-8
+
 " warp long lines
 set wrap
 
@@ -33,7 +36,6 @@ set incsearch
 set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
