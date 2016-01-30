@@ -1,4 +1,5 @@
 scriptencoding utf-8
+set fileencoding=utf-8
 set encoding=utf-8
 
 " warp long lines
@@ -12,9 +13,10 @@ set autoread
 let mapleader = ","
 
 nmap <leader>w :w!<cr>
+map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+set so=5
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -59,8 +61,39 @@ set si "Smart indent
 set wrap "Wrap lines
 
 set nu
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+" set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
 map <F7> mzgg=G`z
 highlight NonText ctermfg=8 guifg=gray
 highlight SpecialKey ctermfg=8
+
+command! Q q " Bind :Q to :q
+command! Qall qall
+command! QA qall
+command! E e
+command! W w
+command! Wq wq
+
+set laststatus=2
+set lazyredraw " Don't redraw screen when running macros.
+highlight StatusLine ctermfg=darkgrey ctermbg=yellow
+
+set shiftround
+au BufNewFile,BufRead *.txt setlocal nolist
+
+nmap k gk
+nmap j gj
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <Leader>n :call RenameFile()<cr>
+
+hi MatchParen cterm=none ctermbg=black ctermfg=yellow

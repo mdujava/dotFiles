@@ -17,7 +17,7 @@ if [ $UID -ne 0 ]; then
     alias update='sudo apt-get upgrade'
 fi
 
-#git 
+#git
 alias gs='git status '
 alias ga='git add '
 alias gb='git branch '
