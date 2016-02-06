@@ -2,8 +2,22 @@ scriptencoding utf-8
 set fileencoding=utf-8
 set encoding=utf-8
 
-" warp long lines
-set wrap
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'Lokaltog/vim-powerline'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -97,3 +111,21 @@ endfunction
 map <Leader>n :call RenameFile()<cr>
 
 hi MatchParen cterm=none ctermbg=black ctermfg=yellow
+autocmd BufWritePost *.py call Flake8()
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+cmap w!! %!sudo tee > /dev/null %
+noremap <silent><Leader>/ :nohls<CR>
+au BufWritePost .vimrc so ~/.vimrc
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+nnoremap <Left>  <NOP>
+nnoremap <Right> <NOP>
+nnoremap <Up>    <NOP>
+nnoremap <Down>  <NOP>
+vnoremap < <gv  "better indetion
+vnoremap > >gv  "better indetion
