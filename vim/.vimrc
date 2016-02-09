@@ -42,7 +42,7 @@ nmap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-
+"
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
@@ -64,9 +64,6 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
 
@@ -80,6 +77,7 @@ set tabstop=4
 " Linebreak on 500 characters
 "set lbr
 "set tw=80
+"let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
 
 set ai "Auto indent
@@ -90,7 +88,6 @@ set nu
 " set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
-
 " reindent file
 map <Leader>f mzgg=G`z
 
@@ -105,6 +102,7 @@ command! Wq wq
 set laststatus=2
 set lazyredraw " Don't redraw screen when running macros.
 highlight StatusLine ctermfg=darkgrey ctermbg=yellow
+
 highlight NonText ctermfg=8 guifg=gray
 highlight SpecialKey ctermfg=8
 
