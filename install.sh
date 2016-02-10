@@ -19,6 +19,7 @@ fi
 # git
 touch ${BASEDIR}/git/.gitconfig
 cat ${BASEDIR}/git/.gitconfig-head >  ${BASEDIR}/git/.gitconfig
+echo '    name =' $name          >> ${BASEDIR}/git/.gitconfig
 echo '    email =' $email          >> ${BASEDIR}/git/.gitconfig
 cat ${BASEDIR}/git/.gitconfig-tail >> ${BASEDIR}/git/.gitconfig
 if [ -f "/home/$USER/.gitconfig" ]
