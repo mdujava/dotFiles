@@ -44,4 +44,9 @@ fi
 vim +PluginInstall +qall
 
 # zsh
-#ln -sv ${BASEDIR}/zshrc ~/.zshrc
+#if [ -f "/home/$USER/.zshrc" ]
+#then
+#    echo "file exists"
+#else
+#    ln -sv ${BASEDIR}/zshrc ~/.zshrc
+#fi
