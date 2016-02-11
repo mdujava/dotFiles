@@ -1,6 +1,6 @@
 # dotFiles
 
-easy install `bash$ email=foo@boo.blahvim  name='Foo Boo' ./install.sh`
+easy install `bash$ ./install.sh`
 
 this provides:
 * .bashrc

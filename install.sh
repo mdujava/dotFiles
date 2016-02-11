@@ -17,6 +17,26 @@ else
 fi
 
 # git
+
+if [ ! $name ]
+then
+    user_record=$(getent passwd $USER)
+    user_gecos_field=$(echo "$user_record" | cut -d ':' -f 5)
+    user_full_name=$(echo "$user_gecos_field" | cut -d ',' -f 1)
+    #$ echo $user_full_name
+
+    read -p "enter your name(or leave blank for $user_full_name):" name
+    if [ ! $name ]
+    then
+        name=$user_full_name
+    fi
+fi
+
+if [ ! $email ]
+then
+read -p "enter your email:" email
+fi
+
 touch ${BASEDIR}/git/.gitconfig
 cat ${BASEDIR}/git/.gitconfig-head >  ${BASEDIR}/git/.gitconfig
 echo '    name =' $name          >> ${BASEDIR}/git/.gitconfig
@@ -51,8 +71,3 @@ vim +PluginInstall +qall
 #else
 #    ln -sv ${BASEDIR}/zshrc ~/.zshrc
 #fi
-
-#$ user_record=$(getent passwd $user_name)
-#$ user_gecos_field=$(echo "$user_record" | cut -d ':' -f 5)
-#$ user_full_name=$(echo "$user_gecos_field" | cut -d ',' -f 1)
-#$ echo $user_full_name
