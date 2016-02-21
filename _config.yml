@@ -10,8 +10,8 @@ title: Archlinux installation
 email: mdujava@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
     my notes how I install archlinux.
-baseurl: "dotFiles" # the subpath of your site, e.g. /blog
-url: "http://matejd11.github.io/dotFiles/" # the base hostname & protocol for your site
+baseurl: "/dotFiles" # the subpath of your site, e.g. /blog
+url: "http://matejd11.github.io/" # the base hostname & protocol for your site
 # twitter_username: matejd
 github_username:  matejd11
 
