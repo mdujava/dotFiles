@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archlinux installation</title>
+    <description>my notes how I install archlinux.
+</description>
+    <link>http://matejd11.github.io/dotFiles//</link>
+    <atom:link href="http://matejd11.github.io/dotFiles//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 21 Feb 2016 16:59:21 +0100</pubDate>
+    <lastBuildDate>Sun, 21 Feb 2016 16:59:21 +0100</lastBuildDate>
+    <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>Arch install</title>
+        <description>&lt;h1 id=&quot;preparing-disk&quot;&gt;Preparing disk&lt;/h1&gt;
+&lt;p&gt;Format disk: &lt;code class=&quot;highlighter-rouge&quot;&gt;fdisk -l&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;cfdisk /dev/sda&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;mkfs.ext4 /dev/sdaX&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Create swap:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkswap /dev/sdaX&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;swapon /dev/sdaX&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Mount disk to &lt;strong&gt;/mnt&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;one partition:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mount /dev/sdaX /mnt&lt;/code&gt; for new &lt;strong&gt;root&lt;/strong&gt; directory&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;additional partition for home/boot:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir /mnt/home; mount /dev/sdaX /mnt/home&lt;/code&gt; for new &lt;strong&gt;home&lt;/strong&gt; directory&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir /mnt/boot; mount /dev/sdaX /mnt/boot&lt;/code&gt; for new &lt;strong&gt;boot&lt;/strong&gt; directory&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;install&quot;&gt;Install&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pacstrap /mnt base base-devel&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;postinstall&quot;&gt;PostInstall&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;arch-chroot /mnt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;passwd&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;uncomment language in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/locale.gen&lt;/code&gt; and run &lt;code class=&quot;highlighter-rouge&quot;&gt;locale-gen&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ln -s /usr/share/zoneinfo/Europe/Bratislava /etc/localtime&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;echo hostname &amp;gt; /etc/hostname&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pacman -S grub-bios&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;grub-install /dev/sda&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkinitcpio -p linux&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exit&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;genfstab /mnt &amp;gt;&amp;gt; /mnt/etc/fstab&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;umount /dev/sda4&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pacman -S i3 dmenu xorg xorg-xinit&lt;/code&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 21 Feb 2016 16:38:00 +0100</pubDate>
+        <link>http://matejd11.github.io/dotFiles//arch/install/2016/02/21/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://matejd11.github.io/dotFiles//arch/install/2016/02/21/welcome-to-jekyll.html</guid>
+        
+        
+        <category>Arch</category>
+        
+        <category>install</category>
+        
+      </item>
+    
+  </channel>
+</rss>
