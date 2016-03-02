@@ -136,6 +136,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" Split window vertically
+nmap <leader>v <C-w>v<C-w>l
+" Split window horizontally
+nmap <leader>s <C-w>s<C-w>j
 
 " save as root
 cmap w!! %!sudo tee > /dev/null %

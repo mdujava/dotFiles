@@ -16,6 +16,14 @@ else
     ln -sv ${BASEDIR}/bash/.bash_aliases ~/.bash_aliases
 fi
 
+# tmux
+if [ -f "/home/$USER/.tmux.conf" ]
+then
+    echo 'file exists'
+else
+    ln -sv ${BASEDIR}/tmux/.tmux.conf ~/.tmux.conf
+fi
+
 # git
 
 if [ ! $name ]
