@@ -128,9 +128,6 @@ map <Leader>n :call RenameFile()<cr>
 " search highlighting
 hi MatchParen cterm=none ctermbg=black ctermfg=yellow
 
-" run linter after saving .py file
-" autocmd BufWritePost *.py call Flake8()
-
 " move accross splits with CTRL+hjkl
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -159,3 +156,8 @@ nnoremap <Down>  <NOP>
 " better indetion
 vnoremap < <gv
 vnoremap > >gv
+"
+" run linter after saving .py file
+" autocmd BufWritePost *.py call Flake8()
+" autocmd BufNewFile,BufRead *.cpp set formatprg=astyle\ -T4pb
+autocmd BufNewFile,BufRead *.c set formatprg=astyle\ -s4pHk3jA3
