@@ -106,6 +106,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_aliases_local ]; then
+    . ~/.bash_aliases_local
+fi
+
+if [ -f ~/.bashrc_private ]; then
+    . ~/.bashrc_private
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -124,3 +132,4 @@ upFunction() {
     ping -w1 -c1 $1 > /dev/null 2>&1 && echo "UP" || echo "DN"
 }
 alias up=upFunction
+alias gccc='gcc -pedantic -Wall -Wextra -Werror -std=c99'
