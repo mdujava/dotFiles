@@ -117,6 +117,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export TERMINAL=uxterm
 export EDITOR=/usr/bin/vim
 
 upFunction() {

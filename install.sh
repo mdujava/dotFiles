@@ -72,6 +72,14 @@ else
 fi
 vim +PluginInstall +qall
 
+# help
+if [ -f "/home/$USER/help" ]
+then
+    echo "file exists"
+else
+    ln -sv ${BASEDIR}/help/help ~/.help
+fi
+
 # zsh
 #if [ -f "/home/$USER/.zshrc" ]
 #then

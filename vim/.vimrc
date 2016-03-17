@@ -17,6 +17,7 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'syngan/vim-vimlint'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-pathogen'
+Plugin 'vim-scripts/DoxygenToolkit.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -164,4 +165,21 @@ vnoremap > >gv
 " run linter after saving .py file
 " autocmd BufWritePost *.py call Flake8()
 " autocmd BufNewFile,BufRead *.cpp set formatprg=astyle\ -T4pb
-autocmd BufNewFile,BufRead *.c set formatprg=astyle\ -s4pHk3jA3
+autocmd BufNewFile,BufRead *.c set formatprg=astyle\ -s4pHk3jA10
+
+"refactoring
+"local
+nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+"global
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+" for hex editing
+augroup Binary
+    au!
+    au BufReadPre  *.bin let &bin=1
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+augroup END
