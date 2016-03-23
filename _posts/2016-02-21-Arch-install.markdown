@@ -50,3 +50,7 @@ uncomment language in `/etc/locale.gen` and run `locale-gen`
 `umount /dev/sda4`
 
 `pacman -S i3 dmenu xorg xorg-xinit`
+
+[link](http://makandracards.com/makandra/1090-customize-your-bash-prompt "Customing prompt")
+
+[link](http://stackoverflow.com/questions/11981716/how-to-quickly-find-all-git-repos-under-a-directory "Git reop finder")
