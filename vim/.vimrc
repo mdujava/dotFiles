@@ -90,7 +90,8 @@ set nu
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
 " reindent file
-map <Leader>f mzgg=G`z
+" map <Leader>f mzgg=G`z
+map <Leader>f mzgggqG`z
 
 " fix Capitalize errors
 command! Q q " Bind :Q to :q
