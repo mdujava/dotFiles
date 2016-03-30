@@ -54,3 +54,9 @@ uncomment language in `/etc/locale.gen` and run `locale-gen`
 [link](http://makandracards.com/makandra/1090-customize-your-bash-prompt "Customing prompt")
 
 [link](http://stackoverflow.com/questions/11981716/how-to-quickly-find-all-git-repos-under-a-directory "Git reop finder")
+
+[link](https://blog.sleeplessbeastie.eu/2013/01/07/how-to-automatically-set-up-external-monitor/)
+
+[link](http://www.simplehelp.net/2009/04/15/how-to-redirect-traffic-to-another-machine-in-linux/)
+
+[link](http://www.techrapid.co.uk/linux/arch-linux/improve-font-rendering-on-arch-linux/)
