@@ -45,11 +45,16 @@ then
 read -p "enter your email:" email
 fi
 
-touch ${BASEDIR}/git/.gitconfig
-cat ${BASEDIR}/git/.gitconfig-head >  ${BASEDIR}/git/.gitconfig
-echo '    name =' $name          >> ${BASEDIR}/git/.gitconfig
-echo '    email =' $email          >> ${BASEDIR}/git/.gitconfig
-cat ${BASEDIR}/git/.gitconfig-tail >> ${BASEDIR}/git/.gitconfig
+if [ -d "${BASEDIR}/git/.gitconfig" ]
+then
+    echo "file exists"
+else
+    touch ${BASEDIR}/git/.gitconfig
+    cat ${BASEDIR}/git/.gitconfig-head >  ${BASEDIR}/git/.gitconfig
+    echo '    name =' $name          >> ${BASEDIR}/git/.gitconfig
+    echo '    email =' $email          >> ${BASEDIR}/git/.gitconfig
+    cat ${BASEDIR}/git/.gitconfig-tail >> ${BASEDIR}/git/.gitconfig
+fi
 if [ -f "/home/$USER/.gitconfig" ]
 then
     echo "file exists"

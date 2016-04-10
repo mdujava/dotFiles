@@ -1,0 +1,12 @@
+git diff > name.patch # gd > name.patch, create git patch
+git format-patch master --stdout > fix_empty_poster.patch
+git apply --stat fix_empty_poster.patch
+git apply --check fix_empty_poster.patch
+git am --signoff < fix_empty_poster.patc
+
+find ~ -name ".git"
+
+modprobe iwlmvm
+
+ip addr add 192.168.1.2/24 broadcast 192.168.1.255 dev enp4s0
+sysctl -w net.ipv4.ip_forward=1
