@@ -3,19 +3,21 @@
 # Skips directories that contain a file called .ignore
 
 HIGHLIGHT="\e[01;34m"
-NORMAL='e[00m'
+NORMAL='\e[00m'
 
 function update {
   local d="$1"
   if [ -d "$d" ]; then
-    if [ -e "$d/.ignore" ]; then 
+    if [ -e "$d.ignore" ]; then
       echo -e "\n${HIGHLIGHT}Ignoring $d${NORMAL}"
     else
       cd $d > /dev/null
       if [ -d ".git" ]; then
         echo -e "\n${HIGHLIGHT}Updating `pwd`${NORMAL}"
+        #git status
+        git status --porcelain | sed s/^...//
       else
-        scan *
+        scan $(find . -type d)
       fi
       cd .. > /dev/null
     fi
@@ -25,7 +27,7 @@ function update {
 
 function scan {
   #echo "`pwd`"
-  for x in $*; do
+  for x in ls -d */; do
     update "$x"
   done
 }

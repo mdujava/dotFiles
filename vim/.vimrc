@@ -18,6 +18,7 @@ Plugin 'syngan/vim-vimlint'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-pathogen'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
+Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -184,3 +185,15 @@ augroup Binary
     au BufWritePost *.bin if &bin | %!xxd
     au BufWritePost *.bin set nomod | endif
 augroup END
+
+"
+"set foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*'.&commentstring[0]
+"autocmd FileType c setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
+"autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
+
+"augroup vimrc
+"    au BufReadPre * setlocal foldmethod=indent
+"    au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+"augroup END
+set foldmethod=syntax
+set clipboard=unnamed
