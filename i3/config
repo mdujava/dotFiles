@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:monospace 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -45,10 +45,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -57,10 +57,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -69,7 +69,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -121,7 +121,6 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+n move workspace to output left
 bindsym $mod+m move workspace to output right
 
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -137,10 +136,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -159,13 +158,35 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     status_command i3status -c ~/.config/i3/i3status/config
+    #status_command i3blocks -c ~/.config/i3/i3status/i3blocks
     position top
-    tray_output eDP1
+    tray_output DP2-2
     tray_output DP1-1
+    tray_output eDP1
 }
-bindsym $mod+x exec /home/matej/lock.sh
+bindsym $mod+x exec i3lock
+bindsym $mod+o move scratchpad 
+bindsym $mod+p scratchpad show
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 1000 ms
 
 exec --no-startup-id nm-applet
-exec --no-startup-id "devmon --no-gui"
-exec --no-startup-id "pulseaudio --start
+#exec --no-startup-id "devmon --no-gui"
+#exec --no-startup-id "pulseaudio --start
+
 #exec --no-stertup-id /usr/local/bin/hotplug_monitor.sh
+#   output eDP1
+#    status_command i3status
+#    tray_output eDP1
+#    binding_mode_indicator yes
+#}
+
+#bar {
+#   output DP2-2
+#   status_command i3status
+#}
+
+# Just add the following lines to your i3 config file
+# # dynamic tagging feature
+bindsym $mod+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/go_to_workspace.py
+bindsym $mod+Shift+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/move_to_workspace.py

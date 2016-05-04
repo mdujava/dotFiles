@@ -1,94 +1,67 @@
 #!/bin/bash
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+USRDIR="$(cd && pwd)"
 
-# bash
-if [ -f "/home/$USER/.bashrc" ]
-then
-    echo 'file exists'
-else
-    ln -sv ${BASEDIR}/bash/.bashrc ~/.bashrc
-fi
-if [ -f "/home/$USER/.bash_aliases" ]
-then
-    echo "file exists"
-else
-    ln -sv ${BASEDIR}/bash/.bash_aliases ~/.bash_aliases
-fi
+function install_git {
+    if [ ! -f ${USERDIR} ]; then
+        user_record=$(getent passwd $USER)
+        user_gecos_field=$(echo "$user_record" | cut -d ':' -f 5)
+        user_full_name=$(echo "$user_gecos_field" | cut -d ',' -f 1)
+        #$ echo $user_full_name
 
-# tmux
-if [ -f "/home/$USER/.tmux.conf" ]
-then
-    echo 'file exists'
-else
-    ln -sv ${BASEDIR}/tmux/.tmux.conf ~/.tmux.conf
-fi
+        read -p "enter your name(or leave blank for $user_full_name):" name
+        if [ ! $name ]; then
+            name=$user_full_name
+        fi
 
-# git
+        if [ ! $email ]; then
+            read -p "enter your email:" email
+        fi
 
-if [ ! $name ]
-then
-    user_record=$(getent passwd $USER)
-    user_gecos_field=$(echo "$user_record" | cut -d ':' -f 5)
-    user_full_name=$(echo "$user_gecos_field" | cut -d ',' -f 1)
-    #$ echo $user_full_name
-
-    read -p "enter your name(or leave blank for $user_full_name):" name
-    if [ ! $name ]
-    then
-        name=$user_full_name
+        touch ${BASEDIR}/git/.gitconfig
+        cat ${BASEDIR}/git/.gitconfig-head >  ${BASEDIR}/git/.gitconfig
+        echo '    name =' $name          >> ${BASEDIR}/git/.gitconfig
+        echo '    email =' $email          >> ${BASEDIR}/git/.gitconfig
+        cat ${BASEDIR}/git/.gitconfig-tail >> ${BASEDIR}/git/.gitconfig
     fi
-fi
+}
 
-if [ ! $email ]
-then
-read -p "enter your email:" email
-fi
+function install {
+    if [ ! -z "$4" ]; then
+        $($4)
+    fi
+    if [ ! -f "$1" ]; then
+        ln -sv $2 $1
+        echo -e "\e[32m$3\e[0m has been installed."
+    else
+        echo -e "\e[31m$3\e[0m is already installed"
+    fi
+}
 
-if [ -d "${BASEDIR}/git/.gitconfig" ]
-then
-    echo "file exists"
-else
-    touch ${BASEDIR}/git/.gitconfig
-    cat ${BASEDIR}/git/.gitconfig-head >  ${BASEDIR}/git/.gitconfig
-    echo '    name =' $name          >> ${BASEDIR}/git/.gitconfig
-    echo '    email =' $email          >> ${BASEDIR}/git/.gitconfig
-    cat ${BASEDIR}/git/.gitconfig-tail >> ${BASEDIR}/git/.gitconfig
-fi
-if [ -f "/home/$USER/.gitconfig" ]
-then
-    echo "file exists"
-else
-    ln -sv ${BASEDIR}/git/.gitconfig ~/.gitconfig
-fi
+# bash #########################
+install ${USRDIR}/.bashrc ${BASEDIR}/bash/.bashrc bashrc
 
-# vim
-if [ -d "/home/$USER/.vim/bundle" ]
-then
-    echo "file exists"
-else
+install ${USRDIR}/.bash_aliases ${BASEDIR}/bash/.bash_aliases bash_aliases
+
+# tmux #########################
+install ${USRDIR}/.tmux.conf ${BASEDIR}/tmux/.tmux.conf tmux.conf
+
+# vim #########################
+install ${USRDIR}/.vimrc ${BASEDIR}/vim/.vimrc vimrc
+
+echo "Installing bundle"
+if [ ! -d "${USERDIR}/.vim/bundle" ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-fi
-if [ -f "/home/$USER/.vimrc" ]
-then
-    echo "file exists"
 else
-    ln -sv ${BASEDIR}/vim/.vimrc ~/.vimrc
+    echo "Bundle is alredy installed"
 fi
+
+echo "Updating vim plugins"
 vim +PluginInstall +qall
 
-# help
-if [ -f "/home/$USER/help" ]
-then
-    echo "file exists"
-else
-    ln -sv ${BASEDIR}/help/help ~/.help
-fi
+# git #########################
+install ${USRDIR}/.gitconfig ${BASEDIR}/git/.gitconfig gitconfig install_git
 
-# zsh
-#if [ -f "/home/$USER/.zshrc" ]
-#then
-#    echo "file exists"
-#else
-#    ln -sv ${BASEDIR}/zshrc ~/.zshrc
-#fi
+# help #########################
+install ${USRDIR}/.help ${BASEDIR}/help/.help "help"
