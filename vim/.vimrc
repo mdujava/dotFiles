@@ -13,7 +13,8 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nvie/vim-flake8'
-Plugin 'Lokaltog/vim-powerline'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'powerline/powerline'
 Plugin 'syngan/vim-vimlint'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-pathogen'
