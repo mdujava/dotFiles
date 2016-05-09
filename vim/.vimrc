@@ -19,6 +19,7 @@ Plugin 'syngan/vim-vimlint'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-pathogen'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
+"Plugin 'bbchung/clighter'
 Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()            " required
@@ -78,10 +79,12 @@ set shiftwidth=4
 set tabstop=4
 
 " Linebreak on 500 characters
-"set lbr
-"set tw=80
+set lbr
+set tw=80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 "let &colorcolumn=join(range(81,999),",")
-let &colorcolumn="80,".join(range(400,999),",")
+"let &colorcolumn="80,".join(range(400,999),",")
 
 set ai "Auto indent
 set si "Smart indent
@@ -105,10 +108,15 @@ command! Wq wq
 
 set laststatus=2
 set lazyredraw " Don't redraw screen when running macros.
-highlight StatusLine ctermfg=darkgrey ctermbg=yellow
 
+highlight StatusLine ctermfg=darkgrey ctermbg=lightRed
 highlight NonText ctermfg=8 guifg=gray
 highlight SpecialKey ctermfg=8
+
+" search highlighting
+highlight MatchParen ctermbg=LightRed ctermfg=LightRed
+highlight Search ctermfg=yellow ctermbg=darkblue cterm=NONE
+" hi Search guibg=LightBlue
 
 set shiftround
 au BufNewFile,BufRead *.txt setlocal nolist
@@ -128,9 +136,6 @@ function! RenameFile()
     endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
-
-" search highlighting
-hi MatchParen cterm=none ctermbg=black ctermfg=yellow
 
 " move accross splits with CTRL+hjkl
 nnoremap <C-h> <C-w>h
@@ -198,3 +203,7 @@ augroup END
 "augroup END
 set foldmethod=syntax
 set clipboard=unnamed
+
+"let g:clighter_autostart = 1
+"let g:clighter_libclang_file = '/usr/lib/libclang.so'
+"nmap <silent> <Leader>r :call clighter#Rename()<CR>
