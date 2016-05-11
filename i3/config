@@ -164,12 +164,16 @@ bar {
     tray_output DP1-1
     tray_output eDP1
 }
-bindsym $mod+x exec i3lock
+bindsym $mod+x exec lock.sh
 bindsym $mod+o move scratchpad 
 bindsym $mod+p scratchpad show
+bindsym $mod+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/go_to_workspace.py
+bindsym $mod+Shift+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/move_to_workspace.py
+
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 1000 ms
 
+exec_alway --no-startup-id numlockx
 exec --no-startup-id nm-applet
 #exec --no-startup-id "devmon --no-gui"
 #exec --no-startup-id "pulseaudio --start
@@ -188,5 +192,3 @@ exec --no-startup-id nm-applet
 
 # Just add the following lines to your i3 config file
 # # dynamic tagging feature
-bindsym $mod+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/go_to_workspace.py
-bindsym $mod+Shift+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/move_to_workspace.py
