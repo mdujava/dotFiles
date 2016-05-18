@@ -97,6 +97,10 @@ set list
 " reindent file
 " map <Leader>f mzgg=G`z
 map <Leader>f mzgggqG`z
+map <Leader>l :SyntasticToggleMode<CR>
+map <Leader>c :SyntasticCheck<CR>
+
+map <Leader>d :Dox<CR>
 
 " fix Capitalize errors
 command! Q q " Bind :Q to :q
@@ -177,9 +181,9 @@ autocmd BufNewFile,BufRead *.c set formatprg=astyle\ -s4pHk3jA10
 
 "refactoring
 "local
-nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+nnoremap gr :nohlsgd[{V%::s/<C-R>///gc<left><left><left>
 "global
-nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+nnoremap gR :nohlsgD:%s/<C-R>///gc<left><left><left>
 " for hex editing
 augroup Binary
     au!
