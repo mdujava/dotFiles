@@ -98,7 +98,8 @@ set list
 " map <Leader>f mzgg=G`z
 map <Leader>f mzgggqG`z
 map <Leader>l :SyntasticToggleMode<CR>
-map <Leader>c :SyntasticCheck<CR>
+autocmd FileType c map <Leader>c :SyntasticCheck<CR>
+autocmd FileType python map <Leader>c :call Flake8()<CR>
 
 map <Leader>d :Dox<CR>
 

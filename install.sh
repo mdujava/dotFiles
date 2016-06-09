@@ -64,4 +64,7 @@ vim +PluginInstall +qall
 install ${USRDIR}/.gitconfig ${BASEDIR}/git/.gitconfig gitconfig install_git
 
 # help #########################
+install ${USRDIR}/.xinitrc ${BASEDIR}/X11/.xinitrc "xinitrc"
+
+# help #########################
 install ${USRDIR}/.help ${BASEDIR}/help/.help "help"
