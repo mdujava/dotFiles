@@ -21,6 +21,7 @@ Plugin 'tpope/vim-pathogen'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 "Plugin 'bbchung/clighter'
 Plugin 'wakatime/vim-wakatime'
+Plugin 'vim-latex/vim-latex'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -182,9 +183,9 @@ autocmd BufNewFile,BufRead *.c set formatprg=astyle\ -s4pHk3jA10
 
 "refactoring
 "local
-nnoremap gr :nohlsgd[{V%::s/<C-R>///gc<left><left><left>
+nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
 "global
-nnoremap gR :nohlsgD:%s/<C-R>///gc<left><left><left>
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 " for hex editing
 augroup Binary
     au!
