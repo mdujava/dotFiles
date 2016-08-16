@@ -14,3 +14,6 @@ chown username:username /home/username
 
 pacman -S sudo
 visudo
+
+# dowgrade kernel
+in pacman.conf add "IgnorePkg = kernel kernel-headers
