@@ -3,7 +3,7 @@ set fileencoding=utf-8
 set encoding=utf-8
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype plugin on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -81,7 +81,6 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=80
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 "let &colorcolumn=join(range(81,999),",")
@@ -213,3 +212,6 @@ set clipboard=unnamed
 "let g:clighter_autostart = 1
 "let g:clighter_libclang_file = '/usr/lib/libclang.so'
 "nmap <silent> <Leader>r :call clighter#Rename()<CR>
+set textwidth=0 wrapmargin=0
+set modeline
+set modelines=5

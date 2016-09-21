@@ -20,6 +20,7 @@ order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery 0"
 order += "load"
+order += "cpu_temperature 0"
 order += "tztime local"
 
 volume master {
@@ -42,6 +43,8 @@ ethernet _first_ {
 
 battery 0 {
         format = "%status %percentage %remaining"
+        last_full_capacity = true
+        low_threshold = 30
 }
 
 run_watch DHCP {
@@ -59,6 +62,10 @@ tztime local {
 
 load {
         format = "%1min"
+}
+
+cpu_temperature 0{
+    format = "T: %degrees°C"
 }
 
 disk "/" {
