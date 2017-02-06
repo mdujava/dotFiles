@@ -72,22 +72,10 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 # some more ls aliases
 alias ll='ls -la --group-directories-first'
-alias la='ls -A'
-alias l='ls -CF'
+alias la='ls -A --group-directories-first'
+alias l='ls -CF --group-directories-first'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -132,6 +120,6 @@ upFunction() {
     ping -w1 -c1 $1 > /dev/null 2>&1 && echo "UP" || echo "DN"
 }
 alias up=upFunction
-alias gccc='gcc -pedantic -Wall -Wextra -Werror -std=c99'
-source ~/.git-prompt.sh
-export PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]✔"; else echo "\[\033[01;31m\]✘"; fi` \[\033[01;30m\]\h\[\033[01;34m\] \w\[\033[35m\]$(__git_ps1 " %s") \[\033[01;31m\]\n>\[\033[00m\] '
+if [ -f ~/git_ps.sh ]; then
+    . ~/git_ps.sh
+fi

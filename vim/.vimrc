@@ -22,6 +22,7 @@ Plugin 'vim-scripts/DoxygenToolkit.vim'
 "Plugin 'bbchung/clighter'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'vim-latex/vim-latex'
+Plugin 'tmhedberg/SimpylFold'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -36,6 +37,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+
+let g:SimpylFold_fold_import = 1
 
 " Set to auto read when a file is changed from the outside
 set autoread
