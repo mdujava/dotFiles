@@ -18,14 +18,33 @@ Plugin 'powerline/powerline'
 Plugin 'syngan/vim-vimlint'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-pathogen'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
+"Plugin 'vim-scripts/DoxygenToolkit.vim'
 "Plugin 'bbchung/clighter'
 Plugin 'wakatime/vim-wakatime'
-Plugin 'vim-latex/vim-latex'
-Plugin 'tmhedberg/SimpylFold'
+"Plugin 'vim-latex/vim-latex'
+"Bundle "tobyS/skeletons.vim"
+" Track the engine.
+"Plugin 'SirVer/ultisnips'
+Plugin 'airblade/vim-gitgutter'
+
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'suan/vim-instant-markdown'
+
+" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 execute pathogen#infect()
 syntax on
@@ -39,6 +58,9 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 
 let g:SimpylFold_fold_import = 1
+let g:skeletons_autoregister = 1
+
+let g:instant_markdown_slow = 1
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -85,7 +107,8 @@ set tabstop=4
 " Linebreak on 500 characters
 set lbr
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+
+au BufNewFile,BufRead *.txt setlocal OverLength /\%121v.\+/
 "let &colorcolumn=join(range(81,999),",")
 "let &colorcolumn="80,".join(range(400,999),",")
 
@@ -145,6 +168,7 @@ function! RenameFile()
 endfunction
 map <Leader>n :call RenameFile()<cr>
 
+let g:C_Ctrl_j = 'off'
 " move accross splits with CTRL+hjkl
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -218,3 +242,22 @@ set clipboard=unnamed
 set textwidth=0 wrapmargin=0
 set modeline
 set modelines=5
+command! MakeTags !ctags -R .
+
+" Remove diacritical signs from characters in specified range of lines.
+" Examples of characters replaced: á -> a, ç -> c, Á -> A, Ç -> C.
+" Uses substitute so changes can be confirmed.
+function! s:RemoveDiacritics(line1, line2)
+  let diacs = 'áéíóúýĺŕťžšďľčň'  " lowercase diacritical signs
+  let repls = 'aeiouylrtzsdlcn'  " corresponding replacements
+  let diacs .= toupper(diacs)
+  let repls .= toupper(repls)
+  let diaclist = split(diacs, '\zs')
+  let repllist = split(repls, '\zs')
+  let trans = {}
+  for i in range(len(diaclist))
+    let trans[diaclist[i]] = repllist[i]
+  endfor
+  execute a:line1.','.a:line2 . 's/['.diacs.']/\=trans[submatch(0)]/gIce'
+endfunction
+command! -range=% RemoveDiacritics call s:RemoveDiacritics(<line1>, <line2>)

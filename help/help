@@ -11,3 +11,20 @@ modprobe iwlmvm
 ip addr add 192.168.1.2/24 broadcast 192.168.1.255 dev enp4s0
 sysctl -w net.ipv4.ip_forward=1
 curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+iconv -f CP1250 -t UTF-8 < input.srt > output.srt
+yaourt -Syyu --aur
+
+# specify the name of your tmux socket with -S when creating it
+tmux -S /tmp/pair
+# chmod to allow other users to access it
+chmod 777 /tmp/pair
+ 
+# now the other user can connect with
+ tmux -S /tmp/pair attach
+
+&feature=mfu_in_order&list=UL
+
+wget --mirror --convert-links --adjust-extension --page-requisites --no-parent
+sudo setfacl -m g:kvm:rwx /media/DATA
+
+/etc/ssl/certs/ca-certificates.crt

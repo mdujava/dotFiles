@@ -4,7 +4,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 USRDIR="$(cd && pwd)"
 
 function install_git {
-    if [ ! -f ${USERDIR} ]; then
+    if [ ! -f ${USERDIR}/.gitconfig ]; then
         user_record=$(getent passwd $USER)
         user_gecos_field=$(echo "$user_record" | cut -d ':' -f 5)
         user_full_name=$(echo "$user_gecos_field" | cut -d ',' -f 1)
@@ -61,10 +61,11 @@ echo "Updating vim plugins"
 vim +PluginInstall +qall
 
 # git #########################
-install ${USRDIR}/.gitconfig ${BASEDIR}/git/.gitconfig gitconfig install_git
+install ${USRDIR}/.gitconfig ${BASEDIR}/git/.gitconfig gitconfig 
+install_git
 
-# help #########################
+# xinit #########################
 install ${USRDIR}/.xinitrc ${BASEDIR}/X11/.xinitrc "xinitrc"
 
 # help #########################
-install ${USRDIR}/.help ${BASEDIR}/help/.help "help"
+install ${USRDIR}/.help ${BASEDIR}/help/help "help"
