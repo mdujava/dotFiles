@@ -4,7 +4,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 USRDIR="$(cd && pwd)"
 
 function install_git {
-    if [ ! -f ${USERDIR}/.gitconfig ]; then
+    if [ ! -f ${USRDIR} ]; then
         user_record=$(getent passwd $USER)
         user_gecos_field=$(echo "$user_record" | cut -d ':' -f 5)
         user_full_name=$(echo "$user_gecos_field" | cut -d ',' -f 1)
