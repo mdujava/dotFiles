@@ -8,23 +8,24 @@
 
 general {
         colors = true
-        interval = 5
+        interval = 10
 }
 
 #order += "ipv6"
 order += "volume master"
 order += "disk /"
-order += "run_watch DHCP"
+order += "disk /home"
+#order += "run_watch DHCP"
 #order += "run_watch VPN"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery 0"
 order += "load"
+#order += "ram"
 order += "cpu_temperature 0"
 order += "tztime local"
 
 volume master {
-        format = "V: %volume"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
@@ -44,13 +45,13 @@ ethernet _first_ {
 battery 0 {
         format = "%status %percentage %remaining"
         last_full_capacity = true
-        low_threshold = 30
+        low_threshold = 40
 }
 
-run_watch DHCP {
-	pidfile = "/var/run/dhclient*.pid"
-#       pidfile = "/var/run/dhcpd*.pid"
-}
+#run_watch DHCP {
+#        pidfile = "/var/run/dhclient*.pid"
+##       pidfile = "/var/run/dhcpd*.pid"
+#}
 
 run_watch VPN {
         pidfile = "/var/run/vpnc/pid"
@@ -61,13 +62,21 @@ tztime local {
 }
 
 load {
-        format = "%1min"
+        format = "%1min %5min %15min"
 }
+
+#ram {
+#        command = awk '/MemTotal/ {memtotal=$2}; /MemAvailable/ {memavail=$2}; END { printf("%f", (100- (memavail / memtotal * 100))) }' /proc/meminfo
+#}
 
 cpu_temperature 0{
     format = "T: %degrees°C"
 }
 
+disk "/home" {
+        format = "/home: %avail"
+}
+
 disk "/" {
-        format = "%avail"
+        format = "/: %avail"
 }

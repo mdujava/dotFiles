@@ -8,6 +8,9 @@ alias gul='git pull'
 alias gd='git diff'
 alias go='git checkout'
 
+alias yt="youtube-dl --add-metadata -ic"
+alias yta="youtube-dl --add-metadata -xic"
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -21,3 +24,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias ip='ip -c'
+alias update='yaourt -Syyu'
+alias updateaur='yaourt -Syyu --aur'
+alias fwd_ssh='eval "$(ssh-agent -s)"; ssh-add -t 300 ~/.ssh/id_rsa'
+alias mailprac='fwd_ssh; ssh anxur -t EDITOR=vim LANG=en_US.UTF-8 mutt -F muttrc-kureti'
+alias mailkoc='fwd_ssh; ssh kocurkovo -t mutt'

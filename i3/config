@@ -30,10 +30,10 @@ font pango:monospace 9
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec uxterm
-bindsym $mod+Return exec gnome-terminal
-bindsym $mod+Shift+Return exec gnome-terminal
+#bindsym $mod+Return exec gnome-terminal
+#bindsym $mod+Shift+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -107,8 +107,8 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Tab workspace next_on_output
+bindsym $mod+Shift+Tab workspace prev_on_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -122,11 +122,11 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-bindsym $mod+Ctrl+Tab move container to workspace next; workspace next
-bindsym $mod+Ctrl+Shift+Tab move container to workspace prev; workspace prev
+bindsym $mod+Ctrl+Tab move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+Ctrl+Shift+Tab move container to workspace prev_on_output; workspace prev_on_output
 
 bindsym $mod+n move workspace to output left
-bindsym $mod+m move workspace to output right
+bindsym $mod+m move workspace to output up
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -167,12 +167,12 @@ bar {
     status_command i3status -c ~/.config/i3/i3status/config
     #status_command i3blocks -c ~/.config/i3/i3status/i3blocks
     position top
-    tray_output DP2-2
-    tray_output DP1-1
-    tray_output eDP1
+    tray_output primary
 }
-bindsym $mod+x exec lock.sh
-bindsym $mod+o move scratchpad 
+bindsym $mod+x exec xscreensaver-command -lock
+bindsym $mod+Shift+s exec bash -c 'xscreensaver-command -lock && systemctl suspend'
+#bindsym $mod+Shift+s exec ~/bin/suspend.sh --blah
+bindsym $mod+o move scratchpad
 bindsym $mod+p scratchpad show
 bindsym $mod+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/go_to_workspace.py
 bindsym $mod+Shift+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.config/i3/move_to_workspace.py
@@ -180,8 +180,17 @@ bindsym $mod+Shift+t exec ~/.config/i3/get_workspace_options.py | dmenu -b | ~/.
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 1000 ms
 
+exec_alway --no-startup-id /usr/lib/polkit-1/polkitd
+
 exec_alway --no-startup-id numlockx
 exec --no-startup-id nm-applet
+
+exec --no-startup-id i3-battery-popup-git
+exec --no-startup-id xscreensaver
+#exec --no-startup-id twmnd
+exec --no-startup-id compton --config ~mdujava/.config/compton.conf -b
+exec --no-startup-id dockd --daemon
+exec --no-startup-id blueman-applet
 
 #exec --no-startup-id "devmon --no-gui"
 #exec --no-startup-id "pulseaudio --start
@@ -205,6 +214,7 @@ exec --no-startup-id nm-applet
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
 bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle
+bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
 #
 # # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
@@ -218,8 +228,10 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindSym $mod+y exec workSetup
-bindSym $mod+z exec workSetup
+#bindSym $mod+y exec workSetup
+#bindSym $mod+z exec workSetup
+bindSym $mod+y exec passmenu
+bindSym $mod+z exec passmenu
 
-assign [class="Firefox"] firefox
+#assign [class="Firefox"] firefox
 #for_window [title="WeeChat"] border pixel 0

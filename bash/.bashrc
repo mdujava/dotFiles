@@ -8,16 +8,17 @@ case $- in
       *) return;;
 esac
 
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+stty -ixon
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE= HISTFILESIZE=
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -133,3 +134,9 @@ export PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]✔"; else echo "\[\033[01
 #if [[ ! $TERM =~ screen ]]; then
 #    exec tmux
 #fi
+
+PATH=$PATH:~/bin
+
+# Command Live Environment
+[ -f /home/mdujava/.cle-mdujava/rc ] && . /home/mdujava/.cle-mdujava/rc
+
