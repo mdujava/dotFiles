@@ -49,6 +49,8 @@ install ${USRDIR}/.tmux.conf ${BASEDIR}/tmux/.tmux.conf tmux.conf
 
 # vim #########################
 install ${USRDIR}/.vimrc ${BASEDIR}/vim/.vimrc vimrc
+install ${USRDIR}/.vim/all.vim ${BASEDIR}/vim/all.vim all.vim
+install ${USRDIR}/.vim/keymap.vim ${BASEDIR}/vim/keymap.vim keymap.vim
 
 echo "Installing bundle"
 if [ ! -d "${USERDIR}/.vim/bundle" ]; then
@@ -61,7 +63,7 @@ echo "Updating vim plugins"
 vim +PluginInstall +qall
 
 # git #########################
-install ${USRDIR}/.gitconfig ${BASEDIR}/git/.gitconfig gitconfig 
+install ${USRDIR}/.gitconfig ${BASEDIR}/git/.gitconfig gitconfig
 install_git
 
 # xinit #########################
