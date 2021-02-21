@@ -1,3 +1,3 @@
 # dotFiles
 
-http://matejd11.github.io/dotFiles/
+http://mdujava.github.io/dotFiles/
