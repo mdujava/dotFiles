@@ -3,45 +3,69 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'wakatime/vim-wakatime'
+"save backup and swap files to one directory
+set undodir=$XDG_DATA_HOME/vim/undo/
+set directory=$XDG_DATA_HOME/vim/swap/
+set backupdir=$XDG_DATA_HOME/vim/backup/
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
 
-Plugin 'vim-latex/vim-latex'
+let vimDir = "$XDG_DATA_HOME/vim/"
+if !has("compatible")
+    let &runtimepath .= ',' . expand(vimDir . '/bundle/Vundle.vim/')
+    call vundle#rc(expand(vimDir . '/bundle/'))
+    call vundle#begin()
 
-Plugin 'nvie/vim-flake8'
-"Plugin 'powerline/powerline'
-Plugin 'syngan/vim-vimlint'
-Plugin 'tpope/vim-pathogen'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'godlygeek/tabular'
+    Plugin 'VundleVim/Vundle.vim'
+    "Plugin 'wakatime/vim-wakatime'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'Raimondi/delimitMate'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fugitive'
-Plugin 'rhysd/vim-grammarous'
-Plugin 'universal-ctags/ctags'
+    Plugin 'vim-latex/vim-latex'
 
-call vundle#end()
+    "Plugin 'neoclide/coc.nvim'
+    "Plugin 'neoclide/coc-yaml'
 
-source ~/.vim/keymap.vim
-source ~/.vim/all.vim
+    Plugin 'nvie/vim-flake8'
+    "Plugin 'powerline/powerline'
+    Plugin 'syngan/vim-vimlint'
+    Plugin 'tpope/vim-pathogen'
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'godlygeek/tabular'
+    Plugin 'croaker/mustang-vim'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'jlanzarotta/bufexplorer'
+    "Plugin 'Valloric/YouCompleteMe'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
+    Plugin 'Raimondi/delimitMate'
+    Plugin 'bling/vim-airline'
+    "Plugin 'scrooloose/syntastic'
+    Plugin 'vim-syntastic/syntastic'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'rhysd/vim-grammarous'
+    Plugin 'universal-ctags/ctags'
+
+    call vundle#end()
+endif
+
+let g:syntastic_javascript_eslint_generic = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+let g:syntastic_typescript_checkers = ['eslint']
+let g:syntastic_typescript_eslint_exe = 'npm run lint --'
+
+" let g:coc_force_debug = 1
 
 set exrc "folder specific rc
 
 " Transparent editing of gpg encrypted files.
 augroup encrypted
 au!
+
 " First make sure nothing is written to ~/.viminfo while editing
 " an encrypted file.
 autocmd BufReadPre,FileReadPre      *.gpg set viminfo=
@@ -70,3 +94,10 @@ autocmd BufWritePre,FileWritePre    *.gpg let &sh=shsave
 autocmd BufWritePost,FileWritePost  *.gpg silent u
 autocmd BufWritePost,FileWritePost  *.gpg set nobin
 augroup END
+
+set clipboard=unnamed,unnamedplus,autoselect
+
+source /home/mdujava/.config/vim/all.vim
+source /home/mdujava/.config/vim/keymap.vim
+
+hi SpecialKey ctermfg=240

@@ -169,10 +169,6 @@ noremap <leader>sp :setlocal spell!<cr>
 "paste mode toggle
 noremap <leader>pp :setlocal paste!<cr>
 
-"save backup and swap files to one directory
-set backupdir=~/.vim/tmp
-set directory=~/.vim/swap
-
 "don't redraw when running macro
 set lazyredraw
 
@@ -187,7 +183,8 @@ set number
 set title
 set confirm
 
-colorscheme mustang
+" colorscheme mustang
+colorscheme torte
 set t_Co=256
 
 "command line completion
@@ -321,6 +318,8 @@ noremap <C-down> gT
 "windows
 noremap <C-l> <C-W>l
 noremap <C-h> <C-W>h
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
 noremap <C-z> <C-W><
 noremap <C-x> <C-W>>
 
@@ -329,8 +328,8 @@ noremap <leader>be :e
 "noremap <leader>bd :bdelete<cr>
 "workaround for closing buffer with tagbar/nerdtree running - window is not closed
 noremap <leader>bd :bprevious<CR>:bdelete #<CR>
-noremap <C-j> :bprev<cr>
-noremap <C-k> :bnext<cr>
+noremap <C-S-j> :bprev<cr>
+noremap <C-S-k> :bnext<cr>
 
 "write with sudo
 cmap w!! w !sudo tee > /dev/null %
@@ -355,7 +354,8 @@ nnoremap gi :YcmCompleter GoToInclude<CR>
 nnoremap t :YcmCompleter GetType<CR>
 
 "open tagbar on supported files during startup
-autocmd VimEnter * nested :call tagbar#autoopen(1)
+" TODO: disabled as caused errors
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
 
 "nerdtree - open on start
 "autocmd VimEnter * NERDTree | wincmd p
